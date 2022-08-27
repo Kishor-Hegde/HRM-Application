@@ -1,6 +1,8 @@
 
 from tkinter import *
 from tkinter import messagebox
+import ctypes
+ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 root=Tk()
 root.title('Login')
