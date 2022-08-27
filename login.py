@@ -1,11 +1,6 @@
-from lib.Auth import AuthenticateUser
+from datetime import datetime
 from tkinter import *
 from tkinter import messagebox
-import ctypes, urllib.request
-
-
-
-ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 root=Tk()
 root.title('Login')
@@ -17,23 +12,20 @@ root.resizable(False,False)
 def signin():
     username=user.get()
     password=code.get()
-    
-    #implement basic email and password validation here
-    def Show(status):
-        if(status):
-            screen=Toplevel(root)
-            screen.title("Application")
-            screen.geometry('925x500+300+200')
-            screen.config(bg="white")
-            Label(screen,text='proceeds to app',bg='#fff',font=('Calibri(Body)',50,'bold'))
-            screen.mainloop()
 
-    AuthenticateUser(username,password,Show)
-
-    
-
-
-    
+    if username=='user' and password=='123':
+        
+        screen=Toplevel(root)
+        screen.title("Application")
+        screen.geometry('925x500+300+200')
+        screen.config(bg="white")
+        login_time=datetime.utcnow()
+        Label(screen,text='proceeds to app',bg='#fff',font=('calibri(Body)',50,'bold')).pack(expand=True)
+        print("logintime",login_time)
+        
+        
+        screen.mainloop()
+        
         
 
 frame=Frame(root,width=350,height=350,bg='white')
@@ -49,6 +41,9 @@ def on_leave(e):
     name=user.get()
     if name=='':
         user.insert(0,'username')
+
+
+
         
 user = Entry(frame,width=25,fg='black',border=0,bg="white",font=('Microsoft YaHei UI Light',11))
 user.place(x=30,y=80)
@@ -56,7 +51,6 @@ user.insert(0,'username')
 user.bind('<FocusIn>', on_enter)
 user.bind('<FocusOut>', on_leave)
 Frame(frame,width=295,height=2,bg='black').place(x=25,y=107)
-
 
 
 def on_enter(e):
@@ -76,6 +70,10 @@ Frame(frame,width=295,height=2,bg='black').place(x=25,y=180)
 
 Button(frame,width=39,pady=7,text='Sign in',bg='#57a1f8', fg='white', border=0,command=signin).place (x=35,y=204) 
 
+
+img = PhotoImage(file='login.png')
+Label(root,image=img,bg='white').place(x=50,y=50)
+frame=Frame(root,width=350,height=350,bg="white")
 
 
 root.mainloop()
