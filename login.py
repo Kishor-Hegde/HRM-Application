@@ -1,7 +1,10 @@
-
+from lib.Auth import AuthenticateUser
 from tkinter import *
 from tkinter import messagebox
-import ctypes
+import ctypes, urllib.request
+
+
+
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 root=Tk()
@@ -14,15 +17,23 @@ root.resizable(False,False)
 def signin():
     username=user.get()
     password=code.get()
+    
+    #implement basic email and password validation here
+    def Show(status):
+        if(status):
+            screen=Toplevel(root)
+            screen.title("Application")
+            screen.geometry('925x500+300+200')
+            screen.config(bg="white")
+            Label(screen,text='proceeds to app',bg='#fff',font=('Calibri(Body)',50,'bold'))
+            screen.mainloop()
 
-    if username=='user' and password=='123':
-        screen=Toplevel(root)
-        screen.title("Application")
-        screen.geometry('925x500+300+200')
-        screen.config(bg="white")
-        Label(screen,text='proceeds to app',bg='#fff',font=('Calibri(Body)',50,'bold'))
-        
-        screen.mainloop()
+    AuthenticateUser(username,password,Show)
+
+    
+
+
+    
         
 
 frame=Frame(root,width=350,height=350,bg='white')
