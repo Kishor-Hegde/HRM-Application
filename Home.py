@@ -1,5 +1,4 @@
 from tkinter import *
-
 from lib.ScreenShot import takeScreenShot
 
 class Home():
