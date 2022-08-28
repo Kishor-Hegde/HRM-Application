@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from Home import Home
 from lib.Auth import AuthenticateUser
 from lib.ImageAsset import resource
@@ -20,6 +21,36 @@ class Login():
         logo.place(x=100,y=150)
         global logoimg
         logoimg=PhotoImage(file=resource("./logo.png"))
+=======
+from datetime import datetime
+from tkinter import *
+from tkinter import messagebox
+
+root=Tk()
+root.title('Login')
+root.geometry('925x500+300+200')
+root.configure(bg="#fff")
+root.resizable(False,False)
+
+
+def signin():
+    username=user.get()
+    password=code.get()
+
+    if username=='user' and password=='123':
+        
+        screen=Toplevel(root)
+        screen.title("Application")
+        screen.geometry('925x500+300+200')
+        screen.config(bg="white")
+        login_time=datetime.utcnow()
+        Label(screen,text='proceeds to app',bg='#fff',font=('calibri(Body)',50,'bold')).pack(expand=True)
+        print("logintime",login_time)
+        
+        
+        screen.mainloop()
+        
+
         
         Label(logo,image=logoimg,bg='white').grid(column=0,row=0)
 
@@ -73,12 +104,40 @@ class Login():
         AuthenticateUser(username,password,Show)
 
 
+<<<<<<< HEAD
+
+
+
+=======
+def on_enter(e):
+    user.delete(0,'end')
+
+def on_leave(e):
+    name=user.get()
+    if name=='':
+        user.insert(0,'username')
+
+
+
+        
+user = Entry(frame,width=25,fg='black',border=0,bg="white",font=('Microsoft YaHei UI Light',11))
+user.place(x=30,y=80)
+user.insert(0,'username')
+user.bind('<FocusIn>', on_enter)
+user.bind('<FocusOut>', on_leave)
+Frame(frame,width=295,height=2,bg='black').place(x=25,y=107)
+
+
+def on_enter(e):
+    code.delete(0,'end')
+>>>>>>> 4f22096c912f77a5a6df1bc88b2ed919b07999a3
 
 
 
 
 
-
-
+img = PhotoImage(file='login.png')
+Label(root,image=img,bg='white').place(x=50,y=50)
+frame=Frame(root,width=350,height=350,bg="white")
 
 
