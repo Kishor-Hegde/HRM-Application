@@ -1,81 +1,84 @@
+from Home import Home
 from lib.Auth import AuthenticateUser
+from lib.ImageAsset import resource
+from lib.ScreenShot import takeScreenShot
 from tkinter import *
-from tkinter import messagebox
-import ctypes, urllib.request
 
 
+class Login():
+    def __init__(self,parent:Tk ):
+            
+        self.root=Frame(parent,width=1000,height=700,bg='white')
+        self.root.grid(row=0,column=0)
+        self.parent=parent
+        parent.title('Login')
+        parent.geometry('1000x700+300+200')
+        parent.configure(bg="#fff")
+        # parent.resizable(False,False)
 
-ctypes.windll.shcore.SetProcessDpiAwareness(1)
-
-root=Tk()
-root.title('Login')
-root.geometry('925x500+300+200')
-root.configure(bg="#fff")
-root.resizable(False,False)
-
-
-def signin():
-    username=user.get()
-    password=code.get()
-    
-    #implement basic email and password validation here
-    def Show(status):
-        if(status):
-            screen=Toplevel(root)
-            screen.title("Application")
-            screen.geometry('925x500+300+200')
-            screen.config(bg="white")
-            Label(screen,text='proceeds to app',bg='#fff',font=('Calibri(Body)',50,'bold'))
-            screen.mainloop()
-
-    AuthenticateUser(username,password,Show)
-
-    
-
-
-    
+        logo=Frame(self.root,bg='blue',width=350,height=500)
+        logo.place(x=100,y=150)
+        global logoimg
+        logoimg=PhotoImage(file=resource("./logo.png"))
         
+        Label(logo,image=logoimg,bg='white').grid(column=0,row=0)
 
-frame=Frame(root,width=350,height=350,bg='white')
-frame.place(x=480,y=70)
+        frame=Frame(self.root,width=350,height=500,bg='white')
+        frame.place(x=580,y=100)
+        heading=Label(frame,text='Sign in',fg="#57a1f8",bg='white',font=('Microsoft YaHei UI Light',23,'bold'))
+        heading.place(x=100,y=20)
 
-heading=Label(frame,text='Sign in',fg="#57a1f8",bg='white',font=('Microsoft YaHei UI Light',23,'bold'))
-heading.place(x=100,y=5)
+        def on_enter(e):
+            self.user.delete(0,'end')    
 
-def on_enter(e):
-    user.delete(0,'end')
-
-def on_leave(e):
-    name=user.get()
-    if name=='':
-        user.insert(0,'username')
-        
-user = Entry(frame,width=25,fg='black',border=0,bg="white",font=('Microsoft YaHei UI Light',11))
-user.place(x=30,y=80)
-user.insert(0,'username')
-user.bind('<FocusIn>', on_enter)
-user.bind('<FocusOut>', on_leave)
-Frame(frame,width=295,height=2,bg='black').place(x=25,y=107)
-
-
-
-def on_enter(e):
-    code.delete(0,'end')
-
-def on_leave(e):
-    name=code.get()
-    if name=='':
-        code.insert(0,'Password')
-code= Entry(frame,width=25,fg='black',border=0,bg="white",font=('Microsoft YaHei UI Light',12))
-code.place(x=30,y=150)
-code.insert(0,'Password')
-code.bind('<FocusIn>', on_enter)
-code.bind('<FocusOut>', on_leave)
-Frame(frame,width=295,height=2,bg='black').place(x=25,y=180)
-
-
-Button(frame,width=39,pady=7,text='Sign in',bg='#57a1f8', fg='white', border=0,command=signin).place (x=35,y=204) 
+        def on_leave(e):
+            name=self.user.get()
+            if name=='':
+                self.user.insert(0,'username')
+                
+        self.user = Entry(frame,width=25,fg='black',border=0,bg="white",font=('Microsoft YaHei UI Light',11))
+        self.user.place(x=30,y=150)
+        self.user.insert(0,'username')
+        self.user.bind('<FocusIn>', on_enter)
+        self.user.bind('<FocusOut>', on_leave)
+        Frame(frame,width=295,height=2,bg='black').place(x=25,y=180)
 
 
 
-root.mainloop()
+        def on_enter(e):
+            self.code.delete(0,'end')
+
+        def on_leave(e):
+            name=self.code.get()
+            if name=='':
+                self.code.insert(0,'Password')
+        self.code= Entry(frame,width=25,fg='black',border=0,bg="white",font=('Microsoft YaHei UI Light',12))
+        self.code.place(x=30,y=250)
+        self.code.insert(0,'Password')
+        self.code.bind('<FocusIn>', on_enter)
+        self.code.bind('<FocusOut>', on_leave)
+        Frame(frame,width=295,height=2,bg='black').place(x=25,y=284)
+        Button(frame,width=37,pady=7,text='Sign in',bg='#57a1f8', fg='white', border=0,command=self.signin).place (x=24,y=400) 
+
+    def forget(self):
+        self.root.destroy()
+    def signin(self):
+        username=self.user.get()
+        password=self.code.get()
+        #implement basic email and password validation here
+        def Show(status):
+            self.root.destroy()
+            if(status):Home(self.parent)
+
+        AuthenticateUser(username,password,Show)
+
+
+
+
+
+
+
+
+
+
+
