@@ -1,9 +1,9 @@
 import ctypes
 import sys
 from tkinter import *
-from Home import Home
+from src.Home import Home
 from lib.Auth import getToken
-from login import Login
+from src.login import Login
 ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 def GetAdministratorPermission():ctypes.windll.shell32.ShellExecuteW(None,'runas',sys.executable," ".join(sys.argv),None,1)
@@ -20,3 +20,5 @@ class App():
 if __name__=='__main__':
         App()
   
+
+

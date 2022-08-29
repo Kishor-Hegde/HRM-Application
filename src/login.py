@@ -1,11 +1,8 @@
-from Home import Home
+from src.Home import Home
 from lib.Auth import AuthenticateUser
 from lib.ImageAsset import resource
 from lib.ScreenShot import takeScreenShot
 from tkinter import *
-
-
-
 
 
 
@@ -18,12 +15,12 @@ class Login():
         parent.title('Login')
         parent.geometry('1000x700+300+200')
         parent.configure(bg="#fff")
-        # parent.resizable(False,False)
+        parent.resizable(False,False)
 
         logo=Frame(self.root,bg='blue',width=350,height=500)
         logo.place(x=100,y=150)
         global logoimg
-        logoimg=PhotoImage(file=resource("./logo.png"))
+        logoimg=PhotoImage(file=resource("./assets/logo.png"))
         
         Label(logo,image=logoimg,bg='white').grid(column=0,row=0)
 
@@ -75,12 +72,4 @@ class Login():
             if(status):Home(self.parent)
 
         AuthenticateUser(username,password,Show)
-
-
-
-
-
-
-
-
 
